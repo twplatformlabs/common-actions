@@ -3,9 +3,14 @@
 name: slack-bot
 
 description: |
-  post slack-bot message to slack. Assumes SLACK_BOT_TOKEN env value is present.
+  Post message to slack using slack-bot API. Assumes $SLACK_BOT_TOKEN is present.
 
-  Use custom-message to provide complete custom json body.
+  Parameters:
+    channel: post message to this slack channel
+    message: message to imbed ni default post format
+    custom-message: override complete post-bot json body
+    include-link: include link to workflow run
+    include-tag: include version tag in message
 
 inputs:
 
@@ -16,20 +21,20 @@ inputs:
   message:
     description: message for default post format
     required: false
-    default: ""
+    default: "empty message"
 
   custom-message:
-    description: override complete post-bot json body
+    description: override complete post-bot json body. Ignores $input.message.
     required: false
     default: ""
 
   include-link:
-    description: include link to workflow run
+    description: include link to workflow run. Default is false.
     required: false
     default: "false"
 
   include-tag:
-    description: include version tag in message
+    description: include version tag in message. Default is false.
     required: false
     default: "false"
 
