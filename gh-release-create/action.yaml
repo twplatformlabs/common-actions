@@ -1,0 +1,106 @@
+# yamllint disable rule:line-length
+---
+name: gh release create
+
+description: github-cli release create command
+
+inputs:
+
+      release-discussion-category:
+        description: Start a discussion in the specified category.
+        required: false
+        default: ""
+      release-draft:
+        description: Save the release as a draft instead of publishing it. Default is false.
+        required: false
+        default: "false"
+      release-fail-on-no-commits:
+        description: Fail if there are no commits since the last release.
+        required: false
+        default: "false"
+      release-generate-notes:
+        description: Automatically generate title and notes for the release.
+        required: false
+        default: "false"
+      release-latest:
+        description: Mark this release as Latest. Default is true.
+        required: false
+        default: "false"
+      release-notes:
+        description: append additional information for release notes.
+        required: false
+        default: ""
+      release-notes-file:
+        description: read release notes from file.
+        required: false
+        default: ""
+      release-notes-from-tag:
+        description: automatically generate notes from annotated tag.
+        required: false
+        default: ""
+      release-start-tag:
+        description: tag to use as the starting point for generating release notes.
+        required: false
+        default: ""
+      release-prerelease:
+        description: Mark the release as a prerelease. Default is false.
+        required: false
+        default: "false"
+      release-target:
+        description: target branch or full commit SHA. Default [main branch].
+        required: false
+        default: ""
+      release-title:
+        description: release title. Default is github.ref_name.
+        required: false
+        default: ${{ github.ref_name }}"
+      release-verify-tag:
+        description: Abort in case the git tag doesn't already exist in the remote repository. Default is false.
+        required: false
+        default: "false"
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: gh reease create
+      shell: bash
+      run: |
+        #!/usr/bin/env bash
+        set -euo pipefail
+
+        args=()
+
+        # ---- boolean flags (presence-based) ----
+        [[ "${{ inputs.release-draft }}" == "true" ]] && args+=(--draft)
+        [[ "${{ inputs.release-fail-on-no-commits }}" == "true" ]] && args+=(--fail-on-no-commits)
+        [[ "${{ inputs.release-generate-notes }}" == "true" ]] && args+=(--generate-notes)
+        [[ "${{ inputs.release-latest }}" == "true" ]] && args+=(--latest)
+        [[ "${{ inputs.release-notes-from-tag }}" == "true" ]] && args+=(--notes-from-tag)
+        [[ "${{ inputs.release-prerelease }}" == "true" ]] && args+=(--prerelease)
+        [[ "${{ inputs.release-verify-tag }}" == "true" ]] && args+=(--verify-tag)
+
+        # ---- value flags ----
+        args+=(--repo "${{ github.repository }}")
+
+        [[ -n "${{ inputs.release-title }}" ]] && \
+          args+=(--title "${{ inputs.release-title }}")
+
+        [[ -n "${{ inputs.release-target }}" ]] && \
+          args+=(--target "${{ inputs.release-target }}")
+
+        [[ -n "${{ inputs.release-notes }}" ]] && \
+          args+=(--notes "${{ inputs.release-notes }}")
+
+        [[ -n "${{ inputs.release-notes-file }}" ]] && \
+          args+=(--notes-file "${{ inputs.release-notes-file }}")
+
+        [[ -n "${{ inputs.release-start-tag }}" ]] && \
+          args+=(--start-tag "${{ inputs.release-start-tag }}")
+
+        [[ -n "${{ inputs.release-discussion-category }}" ]] && \
+          args+=(--discussion-category "${{ inputs.release-discussion-category }}")
+
+        echo "Running: gh release create ${args[*]}"
+
+        gh release create "${{ github.ref_name }}" "${args[@]}"
