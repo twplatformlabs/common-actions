@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: checkout code
-        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29      # v4.1.6
+        uses: actions/checkout@v6
 
       - name: Install 1Password CLI
         uses: 1password/install-cli-action@143a85f84a90555d121cde2ff5872e393a47ab9f      # v1.0.0
@@ -33,17 +33,17 @@ jobs:
           version: 2.28.0
 
       - name: Load slack webhook
-        uses: 1password/load-secrets-action@581a835fb51b8e7ec56b71cf2ffddd7e68bb25e0   # v2.0.0
+        uses: 1password/load-secrets-action@v2.0.0
         with:
           export-env: true
         env:
-          SLACK_BOT_TOKEN: op://empc-lab/svc-slack/gha-slack-bot-token
+          SLACK_BOT_TOKEN: op://platform/svc-slack/platform-slack-bot-token
 
       - name: test common-actions/slack-bot
-        uses: ThoughtWorks-DPS/common-actions/slack-bot@main
+        uses: twplatformlabs/common-actions/slack-bot@main
         with:
           channel: lab-events
-          message: slack-bot test in ThoughtWorks-DPS/common-actions development-build
+          message: integration test of twplatformlabs/common-actions
           custom-message: ""
           include-link: "false"
           include-tag: "false"
