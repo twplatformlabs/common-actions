@@ -1,6 +1,6 @@
 # yamllint disable rule:line-length
 ---
-name: generate release notes using gren
+name: gren
 
 description: generate release notes using gren
 
@@ -21,7 +21,4 @@ runs:
       run: |
         #!/usr/bin/env bash
         set -eo pipefail
-        pwd
-        ls -la
-        gren --help
-        gren release -t $GITHUB_REF_NAME ${{ inputs.gren-additional-args }}
+        gren release -t "${{ github.ref_name }}" "${{ inputs.gren-additional-args }}"

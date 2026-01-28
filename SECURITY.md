@@ -1,7 +1,7 @@
 # Reporting Security Issues
 
 To report a security issue, please email
-[twdps.io@gmail.com](mailto:twdps.io@gmail.com)
+[twplatformlabs@gmail.com](mailto:twplatformlabs@gmail.com)
 with a description of the issue, the steps you took to create the issue,
 affected versions, and, if known, mitigations for the issue.
 
