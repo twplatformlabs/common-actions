@@ -6,7 +6,7 @@ description: load values from 1password vault
 
 inputs:
 
-  instance:
+  flag:
     description: input value that can be used to control which actions are run
     required: false
     default: ""
@@ -17,8 +17,8 @@ runs:
   steps:
 
     - name: load slack-bot credentials
-      uses: 1password/load-secrets-action@581a835fb51b8e7ec56b71cf2ffddd7e68bb25e0    # v2.0.0
+      uses: 1password/load-secrets-action@v2.0.0
       with:
         export-env: true
       env:
-        SLACK_BOT_TOKEN: op://empc-lab/svc-slack/post-bot-token
+        SLACK_BOT_TOKEN: op://platform/svc-slack/platform-slack-bot-token
