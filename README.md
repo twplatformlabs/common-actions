@@ -56,5 +56,4 @@ Create github release on current tag using github-release-notes.
 ```
 
 ### workflows/ossf-scorecard
-
 Add the `.github/workflows/ossf-scorecard.yaml` workflow to your Action repository to keep the local code-scanning security results current.
