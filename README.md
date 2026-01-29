@@ -54,3 +54,6 @@ Create github release on current tag using github-release-notes.
   with:
     gren-additional-args: ""        # include addiitonal gren command line arguments
 ```
+
+
+The vMAJOR tag will be associated with each release.  

@@ -92,6 +92,7 @@ runs:
         RELEASE_LATEST: ${{ inputs.release-latest }}
         RELEASE_PRERELEASE: ${{ inputs.release-prerelease }}
         REF_NAME: ${{ github.ref_name }}
+        REPOSITORY: ${{ github.repository }}
       run: |
         #!/usr/bin/env bash
         set -euo pipefail
@@ -107,7 +108,7 @@ runs:
         [[ "$RELEASE_VERIFY_TAG" == "true" ]] && args+=(--verify-tag)
 
         # ---- value flags ----
-        args+=(--repo "${{ github.repository }}")
+        args+=(--repo "$REPOSITORY")
 
         [[ -n "$RELEASE_TITLE" ]] && \
           args+=(--title "$RELEASE_TITLE")
