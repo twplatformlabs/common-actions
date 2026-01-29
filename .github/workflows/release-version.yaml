@@ -26,4 +26,5 @@ jobs:
       release-generate-notes: "true"
       release-latest: "false"
       release-verify-tag: "true"
+      release-notes: "sha:${{ github.sha }}"
       release-chat-annoucement: "New release of twplatformlabs/common-actions"
