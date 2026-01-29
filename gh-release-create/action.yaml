@@ -102,7 +102,6 @@ runs:
         [[ "$RELEASE_DRAFT" == "true" ]] && args+=(--draft)
         [[ "$RELEASE_FAIL_ON_NO_COMMITS" == "true" ]] && args+=(--fail-on-no-commits)
         [[ "$RELEASE_GENERATE_NOTES" == "true" ]] && args+=(--generate-notes)
-        [[ "$RELEASE_LATEST" == "true" ]] && args+=(--latest)
         [[ "$RELEASE_NOTES_FROM_TAG" == "true" ]] && args+=(--notes-from-tag)
         [[ "$RELEASE_PRERELEASE" == "true" ]] && args+=(--prerelease)
         [[ "$RELEASE_VERIFY_TAG" == "true" ]] && args+=(--verify-tag)
@@ -112,6 +111,9 @@ runs:
 
         [[ -n "$RELEASE_TITLE" ]] && \
           args+=(--title "$RELEASE_TITLE")
+
+        [[ -n "$RELEASE_LATEST" ]] && \
+          args+=(--latest="$RELEASE_LATEST")
 
         [[ -n "$RELEASE_TARGET" ]] && \
           args+=(--target "$RELEASE_TARGET")
