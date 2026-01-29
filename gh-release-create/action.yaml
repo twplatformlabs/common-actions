@@ -99,33 +99,33 @@ runs:
         args=()
 
         # ---- boolean flags (presence-based) ----
-        [[ "${{ inputs.release-draft }}" == "true" ]] && args+=(--draft)
-        [[ "${{ inputs.release-fail-on-no-commits }}" == "true" ]] && args+=(--fail-on-no-commits)
-        [[ "${{ inputs.release-generate-notes }}" == "true" ]] && args+=(--generate-notes)
-        [[ "${{ inputs.release-latest }}" == "true" ]] && args+=(--latest)
-        [[ "${{ inputs.release-notes-from-tag }}" == "true" ]] && args+=(--notes-from-tag)
-        [[ "${{ inputs.release-prerelease }}" == "true" ]] && args+=(--prerelease)
-        [[ "${{ inputs.release-verify-tag }}" == "true" ]] && args+=(--verify-tag)
+        [[ "$RELEASE_DRAFT" == "true" ]] && args+=(--draft)
+        [[ "$RELEASE_FAIL_ON_NO_COMMITS" == "true" ]] && args+=(--fail-on-no-commits)
+        [[ "$RELEASE_GENERATE_NOTES" == "true" ]] && args+=(--generate-notes)
+        [[ "$RELEASE_LATEST" == "true" ]] && args+=(--latest)
+        [[ "$RELEASE_NOTES_FROM_TAG" == "true" ]] && args+=(--notes-from-tag)
+        [[ "$RELEASE_PRERELEASE" == "true" ]] && args+=(--prerelease)
+        [[ "$RELEASE_VERIFY_TAG" == "true" ]] && args+=(--verify-tag)
 
         # ---- value flags ----
         args+=(--repo "${{ github.repository }}")
 
-        [[ -n "${{ inputs.release-title }}" ]] && \
+        [[ -n "$RELEASE_TITLE" ]] && \
           args+=(--title "$RELEASE_TITLE")
 
-        [[ -n "${{ inputs.release-target }}" ]] && \
+        [[ -n "$RELEASE_TARGET" ]] && \
           args+=(--target "$RELEASE_TARGET")
 
-        [[ -n "${{ inputs.release-notes }}" ]] && \
+        [[ -n "$RELEASE_NOTES" ]] && \
           args+=(--notes "$RELEASE_NOTES")
 
-        [[ -n "${{ inputs.release-notes-file }}" ]] && \
+        [[ -n "$RELEASE_NOTES_FILE" ]] && \
           args+=(--notes-file "$RELEASE_NOTES_FILE")
 
-        [[ -n "${{ inputs.release-start-tag }}" ]] && \
+        [[ -n "$RELEASE_START_TAG" ]] && \
           args+=(--start-tag "$RELEASE_START_TAG")
 
-        [[ -n "${{ inputs.release-discussion-category }}" ]] && \
+        [[ -n "$RELEASE_DISCUSSION_CATEGORY" ]] && \
           args+=(--discussion-category "$RELEASE_DISCUSSION_CATEGORY")
 
         echo "Running: gh release create ${args[*]}"
