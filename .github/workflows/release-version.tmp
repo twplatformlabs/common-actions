@@ -18,9 +18,11 @@ jobs:
 
   release-version:
     name: release version
-    uses: twplatformlabs/gha-tools-action/.github/workflows/release-version.yaml@main
+    uses: twplatformlabs/gha-tools-workflows/.github/workflows/action-release.yaml@main
     secrets:
       OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
     with:
-      release-message: New release twplatformlabs/common-actions
-      before-release: true
+      release-generate-notes: "true"
+      release-latest: "false"
+      release-verify-tag: "true"
+      release-chat-annoucement: "New release of twplatformlabs/common-actions"
