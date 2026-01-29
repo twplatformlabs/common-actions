@@ -18,7 +18,10 @@ runs:
 
     - name: generate release notes using gren
       shell: bash
+      env:
+        GREN_ADDITIONAL_ARGS: ${{ inputs.gren-additional-args }}
+        REF_NAME: ${{ github.ref_name }}
       run: |
         #!/usr/bin/env bash
         set -eo pipefail
-        gren release -t "${{ github.ref_name }}" "${{ inputs.gren-additional-args }}"
+        gren release -t "$REF_NAME" "$GREN_ADDITIONAL_ARGS"

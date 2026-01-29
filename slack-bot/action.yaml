@@ -51,6 +51,7 @@ runs:
         CUSTOM_MESSAGE: ${{ inputs.custom-message }}
         INCLUDE_LINK: ${{ inputs.include-link }}
         INCLUDE_TAG: ${{ inputs.include-tag }}
+        REF_NAME: ${{ github.ref_name }}
       run: |
         #!/usr/bin/env bash
         set -eo pipefail
@@ -60,7 +61,7 @@ runs:
         if [[ "$INCLUDE_TAG" == "false" ]]; then
           msg="$MESSAGE"
         else
-          msg="$MESSAGE ${{ github.ref_name }}"
+          msg="$MESSAGE $REF_NAME"
         fi
 
         if [[ "$CUSTOM_MESSAGE" != "" ]]; then

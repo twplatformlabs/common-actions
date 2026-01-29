@@ -77,6 +77,21 @@ runs:
   steps:
     - name: gh reease create
       shell: bash
+      env:
+        RELEASE_DISCUSSION_CATEGORY: ${{ inputs.release-discussion-category }}
+        RELEASE_NOTES_FILE: ${{ inputs.release-notes-file }}
+        RELEASE_NOTES_FROM_TAG: ${{ inputs.release-notes-from-tag }}
+        RELEASE_NOTES: ${{ inputs.release-notes }}
+        RELEASE_START_TAG: ${{ inputs.release-start-tag }}
+        RELEASE_TITLE: ${{ inputs.release-title }}
+        RELEASE_TARGET: ${{ inputs.release-target }}
+        RELEASE_VERIFY_TAG: ${{ inputs.release-verify-tag }}
+        RELEASE_DRAFT: ${{ inputs.release-draft }}
+        RELEASE_FAIL_ON_NO_COMMITS: ${{ inputs.release-fail-on-no-commits }}
+        RELEASE_GENERATE_NOTES: ${{ inputs.release-generate-notes }}
+        RELEASE_LATEST: ${{ inputs.release-latest }}
+        RELEASE_PRERELEASE: ${{ inputs.release-prerelease }}
+        REF_NAME: ${{ github.ref_name }}
       run: |
         #!/usr/bin/env bash
         set -euo pipefail
@@ -96,23 +111,23 @@ runs:
         args+=(--repo "${{ github.repository }}")
 
         [[ -n "${{ inputs.release-title }}" ]] && \
-          args+=(--title "${{ inputs.release-title }}")
+          args+=(--title "$RELEASE_TITLE")
 
         [[ -n "${{ inputs.release-target }}" ]] && \
-          args+=(--target "${{ inputs.release-target }}")
+          args+=(--target "$RELEASE_TARGET")
 
         [[ -n "${{ inputs.release-notes }}" ]] && \
-          args+=(--notes "${{ inputs.release-notes }}")
+          args+=(--notes "$RELEASE_NOTES")
 
         [[ -n "${{ inputs.release-notes-file }}" ]] && \
-          args+=(--notes-file "${{ inputs.release-notes-file }}")
+          args+=(--notes-file "$RELEASE_NOTES_FILE")
 
         [[ -n "${{ inputs.release-start-tag }}" ]] && \
-          args+=(--start-tag "${{ inputs.release-start-tag }}")
+          args+=(--start-tag "$RELEASE_START_TAG")
 
         [[ -n "${{ inputs.release-discussion-category }}" ]] && \
-          args+=(--discussion-category "${{ inputs.release-discussion-category }}")
+          args+=(--discussion-category "$RELEASE_DISCUSSION_CATEGORY")
 
         echo "Running: gh release create ${args[*]}"
 
-        gh release create "${{ github.ref_name }}" "${args[@]}"
+        gh release create "$REF_NAME" "${args[@]}"
