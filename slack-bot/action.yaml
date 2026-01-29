@@ -50,13 +50,6 @@ runs:
         set -eo pipefail
 
         WORKFLOW_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-        echo "DEBUG: dependent env vars"
-        echo "CHANNEL=${{ inputs.channel }}"
-        echo "MESSAGE=${{ inputs.message }}"
-        echo "CUSTOM_MESSAGE=${{ inputs.custom-message }}"
-        echo "INCLUDE_LINK=${{ inputs.include-link }}"
-        echo "INCLUDE_TAG=${{ inputs.include-tag }}"
-        echo "WORKFLOW_URL=$WORKFLOW_URL"
 
         if [[ "${{ inputs.include-tag }}" == "false" ]]; then
           msg="${{ inputs.message }}"
