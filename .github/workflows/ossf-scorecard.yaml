@@ -2,6 +2,8 @@
 # yamllint disable rule:truthy
 ---
 name: Scorecard analysis workflow
+run-name: Scorecard analysis
+
 on:
   push:
     branches:
