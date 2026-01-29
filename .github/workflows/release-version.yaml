@@ -22,6 +22,7 @@ jobs:
     secrets:
       OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
     with:
+      before-release: "true"
       release-generate-notes: "true"
       release-latest: "false"
       release-verify-tag: "true"

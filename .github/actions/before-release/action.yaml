@@ -22,3 +22,4 @@ runs:
         export-env: true
       env:
         SLACK_BOT_TOKEN: op://platform/svc-slack/platform-slack-bot-token
+        GH_TOKEN: op://platform/svc-github/access-token
